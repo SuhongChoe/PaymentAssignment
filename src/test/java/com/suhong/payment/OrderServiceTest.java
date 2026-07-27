@@ -32,6 +32,20 @@ public class OrderServiceTest {
     }
 
     @Test
+    void 정상_금액이면_결제가_실행된다() {
+        // given
+        FakePaymentMethod fakePaymentMethod = new FakePaymentMethod();
+        OrderService orderService = new OrderService(fakePaymentMethod);
+
+        // when
+        orderService.checkout(15000);
+
+        // then
+        assertTrue(fakePaymentMethod.isPaid());
+        assertEquals(15000, fakePaymentMethod.getPaidAmount());
+    }
+
+    @Test
     void 금액이_0원이면_결제가_실행되지_않는다() {
         // given
         FakePaymentMethod fakePaymentMethod = new FakePaymentMethod();
