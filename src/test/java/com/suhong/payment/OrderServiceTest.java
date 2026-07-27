@@ -1,6 +1,8 @@
 package com.suhong.payment;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -45,27 +47,15 @@ public class OrderServiceTest {
         assertEquals(15000, fakePaymentMethod.getPaidAmount());
     }
 
-    @Test
-    void 금액이_0원이면_결제가_실행되지_않는다() {
+    @ParameterizedTest
+    @ValueSource(ints = {0, -1, -100})
+    void 유효하지_않은_금액이면_결제가_실행되지_않는다(int amount) {
         // given
         FakePaymentMethod fakePaymentMethod = new FakePaymentMethod();
         OrderService orderService = new OrderService(fakePaymentMethod);
 
         // when
-        orderService.checkout(0);
-
-        // then
-        assertFalse(fakePaymentMethod.isPaid());
-    }
-
-    @Test
-    void 금액이_음수이면_결제가_실행되지_않는다() {
-        // given
-        FakePaymentMethod fakePaymentMethod = new FakePaymentMethod();
-        OrderService orderService = new OrderService(fakePaymentMethod);
-
-        // when
-        orderService.checkout(-100);
+        orderService.checkout(amount);
 
         // then
         assertFalse(fakePaymentMethod.isPaid());
