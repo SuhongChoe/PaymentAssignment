@@ -1,5 +1,7 @@
 package com.suhong.payment;
 
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
         int amount = 15000;
@@ -19,6 +21,7 @@ public class Main {
 
         // OrderService를 사용하여 결제 수단별로 서비스를 생성
 
+        /*
         // 신용카드 결제
         PaymentMethod cardPayment = new CardPayment();
         OrderService cardOrderService = new OrderService(cardPayment);
@@ -38,5 +41,18 @@ public class Main {
         PaymentMethod pointPayment = new PointPayment();
         OrderService pointOrderService = new OrderService(pointPayment);
         pointOrderService.checkout(amount);
+        */
+
+        List<PaymentMethod> paymentMethodList = List.of(
+                new CardPayment(),
+                new KakaoPayPayment(),
+                new BankTransferPayment(),
+                new PointPayment()
+        );
+
+        for (PaymentMethod paymentMethod : paymentMethodList) {
+            OrderService paymentOrderService = new OrderService(paymentMethod);
+            paymentOrderService.checkout(amount);
+        }
     }
 }
