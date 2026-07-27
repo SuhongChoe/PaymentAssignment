@@ -33,5 +33,10 @@ public class Main {
         PaymentMethod bankTransferPayment = new BankTransferPayment();
         OrderService bankTransferOrderService = new OrderService(bankTransferPayment);
         bankTransferOrderService.checkout(amount);
+
+        // 포인트 결제
+        PaymentMethod pointPayment = new PointPayment();
+        OrderService pointOrderService = new OrderService(pointPayment);
+        pointOrderService.checkout(amount);
     }
 }
