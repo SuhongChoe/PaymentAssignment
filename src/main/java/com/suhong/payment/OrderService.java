@@ -1,10 +1,15 @@
 package com.suhong.payment;
 
+import java.util.Objects;
+
 public class OrderService {
     private final PaymentMethod paymentMethod;
 
     public OrderService(PaymentMethod paymentMethod) {
-        this.paymentMethod = paymentMethod;
+        this.paymentMethod = Objects.requireNonNull(
+                paymentMethod,
+                "결제 수단은 필수입니다."
+        );
     }
 
     public void checkout(int amount) {

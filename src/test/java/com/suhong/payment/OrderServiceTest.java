@@ -71,4 +71,20 @@ public class OrderServiceTest {
         );
         assertFalse(fakePaymentMethod.isPaid());
     }
+
+    @Test
+    void 결제_수단이_null이면_객체를_생성할_수_없다() {
+        // given
+
+        // when, then
+        NullPointerException exception = assertThrows(
+                NullPointerException.class,
+                () -> new OrderService(null)
+        );
+
+        assertEquals(
+                "결제 수단은 필수입니다.",
+                exception.getMessage()
+        );
+    }
 }
