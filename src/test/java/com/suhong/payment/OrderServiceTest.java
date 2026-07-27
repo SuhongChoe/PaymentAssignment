@@ -30,7 +30,6 @@ public class OrderServiceTest {
         public int getPaidAmount() {
             return paidAmount;
         }
-
     }
 
     @Test
@@ -54,10 +53,16 @@ public class OrderServiceTest {
         FakePaymentMethod fakePaymentMethod = new FakePaymentMethod();
         OrderService orderService = new OrderService(fakePaymentMethod);
 
-        // when
-        orderService.checkout(amount);
+        // when, then
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> orderService.checkout(amount)
+        );
 
-        // then
+        assertEquals(
+                "결제 금액은 0원보다 커야 합니다.",
+                exception.getMessage()
+        );
         assertFalse(fakePaymentMethod.isPaid());
     }
 }
