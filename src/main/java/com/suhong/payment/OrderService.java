@@ -3,7 +3,6 @@ package com.suhong.payment;
 public class OrderService {
     private final PaymentMethod paymentMethod;
 
-    // 생성자 작성
     public OrderService(PaymentMethod paymentMethod) {
         this.paymentMethod = paymentMethod;
     }

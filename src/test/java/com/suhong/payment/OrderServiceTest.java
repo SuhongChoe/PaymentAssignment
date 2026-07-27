@@ -1,5 +1,6 @@
 package com.suhong.payment;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -7,6 +8,15 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class OrderServiceTest {
+    private FakePaymentMethod fakePaymentMethod;
+    private OrderService orderService;
+
+    @BeforeEach
+    void setup() {
+        fakePaymentMethod = new FakePaymentMethod();
+        orderService = new OrderService(fakePaymentMethod);
+    }
+
     // 테스트 전용 구현체 만들기
     static class FakePaymentMethod implements PaymentMethod {
         private boolean paid = false;
@@ -35,8 +45,6 @@ public class OrderServiceTest {
     @Test
     void 정상_금액이면_결제가_실행된다() {
         // given
-        FakePaymentMethod fakePaymentMethod = new FakePaymentMethod();
-        OrderService orderService = new OrderService(fakePaymentMethod);
 
         // when
         orderService.checkout(15000);
@@ -50,8 +58,6 @@ public class OrderServiceTest {
     @ValueSource(ints = {0, -1, -100})
     void 유효하지_않은_금액이면_결제가_실행되지_않는다(int amount) {
         // given
-        FakePaymentMethod fakePaymentMethod = new FakePaymentMethod();
-        OrderService orderService = new OrderService(fakePaymentMethod);
 
         // when, then
         IllegalArgumentException exception = assertThrows(
