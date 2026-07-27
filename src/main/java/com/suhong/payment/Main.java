@@ -1,7 +1,7 @@
 package com.suhong.payment;
 
 public class Main {
-    public static void main(String[] args){
+    public static void main(String[] args) {
         int amount = 15000;
 
         // 1차 작성 코드 -> 단순히 같은 변수에 다른 객체를 넣으려는 목적

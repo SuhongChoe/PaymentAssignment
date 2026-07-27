@@ -10,13 +10,13 @@ public class OrderService {
 //        this.paymentMethod = paymentMethod;
 //    };
 
-    public OrderService(PaymentMethod paymentMethod){
+    public OrderService(PaymentMethod paymentMethod) {
         this.paymentMethod = paymentMethod;
     }
 
     public void checkout(int amount) {
-        if(amount <= 0){
-            System.out.println("유효하지 않은 값입니다.");
+        if (amount <= 0) {
+            System.out.println("결제 금액은 0원보다 커야 합니다.");
             return;
         }
         // 결제 수단 이름 출력
