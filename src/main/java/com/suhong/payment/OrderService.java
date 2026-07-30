@@ -12,7 +12,7 @@ public class OrderService {
         );
     }
 
-    public void checkout(int amount) {
+    public PaymentResult checkout(int amount) {
         if (amount <= 0) {
             throw new IllegalArgumentException(
                     "결제 금액은 0원보다 커야 합니다."
@@ -23,5 +23,10 @@ public class OrderService {
         // 실제 결제 실행
         paymentMethod.pay(amount);
         System.out.println("결제가 완료되었습니다.");
+
+        return new PaymentResult(
+                paymentMethod.getName(),
+                amount
+        );
     }
 }

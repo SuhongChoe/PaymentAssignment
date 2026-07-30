@@ -47,11 +47,15 @@ public class OrderServiceTest {
         // given
 
         // when
-        orderService.checkout(15000);
+        PaymentResult result = orderService.checkout(15000);
 
         // then
         assertTrue(fakePaymentMethod.isPaid());
         assertEquals(15000, fakePaymentMethod.getPaidAmount());
+
+        // PaymentResult 내용 검증
+        assertEquals(fakePaymentMethod.getName(), result.paymentMethodName());
+        assertEquals(fakePaymentMethod.getPaidAmount(), result.amount());
     }
 
     @ParameterizedTest
