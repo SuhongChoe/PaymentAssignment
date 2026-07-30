@@ -54,8 +54,8 @@ public class OrderServiceTest {
         assertEquals(15000, fakePaymentMethod.getPaidAmount());
 
         // PaymentResult 내용 검증
-        assertEquals(fakePaymentMethod.getName(), result.paymentMethodName());
-        assertEquals(fakePaymentMethod.getPaidAmount(), result.amount());
+        assertEquals("테스트 결제", result.paymentMethodName());
+        assertEquals(15000, result.amount());
     }
 
     @ParameterizedTest
