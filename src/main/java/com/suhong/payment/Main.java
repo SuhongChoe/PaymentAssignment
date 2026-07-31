@@ -4,18 +4,20 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        int amount = 15000;
 
-        List<PaymentMethod> paymentMethods = List.of(
-                new CardPayment(),
-                new KakaoPayPayment(),
-                new BankTransferPayment(),
-                new PointPayment()
+        int amount = 15000;
+        List<PaymentType> paymentTypes = List.of(
+                PaymentType.CARD,
+                PaymentType.KAKAO_PAY,
+                PaymentType.BANK_TRANSFER,
+                PaymentType.POINT
         );
 
-        for (PaymentMethod paymentMethod : paymentMethods) {
+        for (PaymentType paymentType : paymentTypes) {
+            PaymentMethod paymentMethod = PaymentMethodFactory.create(paymentType);
             OrderService orderService = new OrderService(paymentMethod);
-            orderService.checkout(amount);
+            // 결과 출력
+            PaymentResult result = orderService.checkout(amount);
         }
     }
 }
