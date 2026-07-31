@@ -20,7 +20,7 @@ public class Main {
 
             // 결과 출력
             System.out.println(
-                    result.paymentMethodName() + ": " result.amount() + "원"
+                    result.paymentMethodName() + ": " + result.amount() + "원"
             );
         }
     }
