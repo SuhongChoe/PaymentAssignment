@@ -16,8 +16,12 @@ public class Main {
         for (PaymentType paymentType : paymentTypes) {
             PaymentMethod paymentMethod = PaymentMethodFactory.create(paymentType);
             OrderService orderService = new OrderService(paymentMethod);
-            // 결과 출력
             PaymentResult result = orderService.checkout(amount);
+
+            // 결과 출력
+            System.out.println(
+                    result.paymentMethodName() + ": " result.amount() + "원"
+            );
         }
     }
 }

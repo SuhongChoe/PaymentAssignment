@@ -126,7 +126,7 @@ public class OrderServiceTest {
     }
 
     @Test
-    void Point는_PointPayment를_생성한다() {
+    void POINT는_PointPayment를_생성한다() {
         // given
 
         // when
